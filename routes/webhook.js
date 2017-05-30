@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var PAGE_ACCESS_TOKEN = require('../config/default.json').pageAccessToken;
+var request = require('request');
 
 router.get('/', function(req, res) {
   console.log("fonction get");
