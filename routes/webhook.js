@@ -3,6 +3,7 @@ var router = express.Router();
 
 
 router.get('/', function(req, res) {
+  console.log("fonction get");
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === 'totoken') {
     console.log("Validating webhook");
@@ -15,7 +16,7 @@ router.get('/', function(req, res) {
 
 router.post('/', function (req, res) {
   var data = req.body;
-
+  console.log("fonction post");
   // Make sure this is a page subscription
   if (data.object === 'page') {
 
