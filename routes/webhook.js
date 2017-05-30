@@ -99,6 +99,7 @@ function sendTextMessage(recipientId, messageText) {
 
 
 function callSendAPI(messageData) {
+  console.log(PAGE_ACCESS_TOKEN);
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: PAGE_ACCESS_TOKEN },
