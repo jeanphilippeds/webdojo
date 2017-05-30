@@ -9,6 +9,18 @@ var homepage = require('./routes/index');
 
 var app = express();
 
+//Route webhook
+app.get('/webhook', function(req, res) {
+  if (req.query['hub.mode'] === 'subscribe' &&
+      req.query['hub.verify_token'] === 'totoken') {
+    console.log("Validating webhook");
+    res.status(200).send(req.query['hub.challenge']);
+  } else {
+    console.error("Failed validation. Make sure the validation tokens match.");
+    res.sendStatus(403);
+  }
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -41,18 +53,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
-//Route webhook
-
-app.get('/webhook', function(req, res) {
-  if (req.query['hub.mode'] === 'subscribe' &&
-      req.query['hub.verify_token'] === <VERIFY_TOKEN>) {
-    console.log("Validating webhook");
-    res.status(200).send(req.query['hub.challenge']);
-  } else {
-    console.error("Failed validation. Make sure the validation tokens match.");
-    res.sendStatus(403);
-  }
-});
 
 module.exports = app;
